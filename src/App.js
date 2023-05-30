@@ -13,6 +13,19 @@ const App = () => {
     // player array states
   const [xPlayer, setXplayer] = useState([])
   const [oPlayer, setOplayer] = useState([])
+  // const [choiceOne, setChoiceOne] = useState([])
+
+  // const playerChoices = [empireIcon, rebelIcon, jediIcon, niteIcon ]
+
+  const empireIcon = <img className="empIcon" src="https://i.stack.imgur.com/hgc0o.png"/>
+  
+  const rebelIcon = <img className="rebIcon" src="https://upload.wikimedia.org/wikipedia/commons/2/20/Emblem_of_the_Rebel_Alliance.svg"/>
+
+  // const jediIcon = <img className="rebIcon" src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/star-wars-episode-7/9/9c/Jedi-Order-Insignia.png?width=2240"/>
+
+  // const niteIcon = <img className="rebIcon" src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/star-wars-episode-7/8/80/Nite_owls.png?width=2240"/>
+
+
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -24,13 +37,14 @@ const App = () => {
     [2, 4, 6],
   ];
 
+  // choose players
+  const playerChoice = (indexNum) => {
+
+  }
   // Game loop
   const playerClicks = (targetIndex) => {
     updateClicks()
     updateArray(targetIndex)
-   
-
-   
   }
 
     // check if player array includes an array element.
@@ -40,16 +54,13 @@ const App = () => {
     lines.some(line => line.every(element => array.includes(element)));
   
     if(containsAllElements) {
-
       setTheWinner(string)
       setAWinner(true)
-      
     }
     if(numberOfClicks >= 8) {
-      setAWinner(true)
-     
+      setAWinner(true) 
+      setTheWinner("It's a tie, nobody")
     }
-   
     // check after each turn
     // go to win condition if player wins
   }
@@ -77,35 +88,38 @@ const App = () => {
   const updateClicks = () => {
     let clickNumber = numberOfClicks + 1
     setNumberOfClicks(clickNumber)
-   
- 
   }
+
 
 //  checks wither an X or O is played
   const updateArray = (targetIndex) => {
     let newSquaresArray = [...squares]
     if(numberOfClicks % 2 === 0){
-      newSquaresArray[targetIndex] = "X"
+      newSquaresArray[targetIndex] = empireIcon
       setSquares(newSquaresArray)
       let newPlayerXArray = [...xPlayer, targetIndex]
       setXplayer(newPlayerXArray)
-      winCheck(newPlayerXArray, "Player X")
+      winCheck(newPlayerXArray, "The Empire")
       console.log(xPlayer)} 
     
-    else {newSquaresArray[targetIndex] = "O"
+    else {newSquaresArray[targetIndex] = rebelIcon
       setSquares(newSquaresArray)
       let newPlayerOArray = [...oPlayer, targetIndex]
       setOplayer(newPlayerOArray)
-      winCheck(newPlayerOArray, "Player O")
-      console.log(oPlayer)}
-      
+      winCheck(newPlayerOArray, "The Rebel Alliance")
+      console.log(oPlayer)} 
   }
 
+  const refreshPage = () => {window.location.reload()}
 
+  const turnIcon = () => {return (!hasAWinner && numberOfClicks % 2 === 1) ? rebelIcon : empireIcon}
+
+
+  const turnText = () => {return (!hasAWinner && numberOfClicks % 2 === 1) ? "The Rebel Alliance's Turn" : "The Empire's Turn"}
 
   return (
     <>
-      <h1>Tic Tac Toe</h1>
+      <h1><span className="title">Tic Tac Toe</span></h1>
       <div className="gameBoard">
 
         {/* maps over 'squares' state to create board */}
@@ -118,12 +132,16 @@ const App = () => {
           playerClicks={playerClicks}
           />
         })}
+        
         {hasAWinner &&   <>
-          <div className = "winText"> {theWinner} has won the game!</div>
-          <button>Restart?</button>
-
-          
+          <div className='winMessage'>
+            <div className = "winText"> {theWinner} has won the game!</div>
+            <button className="button" onClick={refreshPage}>Restart?</button>
+  
+          </div>
           </>}
+          {numberOfClicks > 0 && !hasAWinner ? turnIcon() : null}
+          {numberOfClicks > 0 && !hasAWinner ? turnText() : null}
 
       </div>
     </>

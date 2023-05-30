@@ -1,5 +1,15 @@
+* {
+  color: white;
+
+}
+
+body {
+  background-image: url("https://i.pinimg.com/originals/5d/10/c4/5d10c491dce6d23d51dd41462e76f777.jpg");
+  background-color: bisque;
+}
+
 .square {
-  border: 2px solid black;
+  border: 3px solid maroon;
   height: 100px;
   width: 100px;
 }
@@ -7,5 +17,60 @@
 .gameBoard {
   display: flex;
   flex-wrap: wrap;
-  width: 320px;
+  width: 318px;
+  margin: 0 auto;
+
+}
+
+.square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  background-color: rgb(240, 248, 255, .3);
+  /* opacity: .3; */
+}
+h1 {
+  display: flex;
+  justify-content: center;
+  /* background-color: aliceblue; */
+  
+}
+
+.button {
+  border-style: none;
+  color: white;
+  background-color: maroon;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.empIcon {
+  height: 80px;
+  width: 80px;
+}
+
+.rebIcon {
+  height: 80px;
+  width: 80px;
+}
+
+.winMessage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.winText {
+  background-color: rgb(121, 77, 43, 0.6);
+  border-radius: 15px;
+  padding: 5px;
+}
+
+.title {
+  background-color: rgb(121, 77, 43, 0.6);
+  border-radius: 15px;
+  padding: 5px;
 }
