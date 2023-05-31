@@ -9,7 +9,7 @@ const App = () => {
   const [theWinner, setTheWinner] = useState("")
 
   // sets newSquaresArray to copy of squares, sets selected targetIndex to an 'x', then sets squares to the new array values.
-  const [numberOfClicks, setNumberOfClicks] = useState(0)
+  const [numberOfClicks, setNumberOfClicks] = useState(1)
     // player array states
   const [xPlayer, setXplayer] = useState([])
   const [oPlayer, setOplayer] = useState([])
@@ -38,12 +38,13 @@ const App = () => {
   ];
 
   // choose players
-  const playerChoice = (indexNum) => {
-
-  }
+  // const playerChoice = (indexNum) => {
+  // }
   // Game loop
   const playerClicks = (targetIndex) => {
-    updateClicks()
+    setNumberOfClicks(numberOfClicks + 1)
+    // updateClicks()
+    console.log(numberOfClicks);
     updateArray(targetIndex)
   }
 
@@ -85,37 +86,37 @@ const App = () => {
   // }
 
   // updates the number of clicks, and checks conditions
-  const updateClicks = () => {
-    let clickNumber = numberOfClicks + 1
-    setNumberOfClicks(clickNumber)
-  }
+  // const updateClicks = () => {
+  //   let clickNumber = numberOfClicks + 1
+  //   setNumberOfClicks(clickNumber)
+  // }
 
 
-//  checks wither an X or O is played
   const updateArray = (targetIndex) => {
     let newSquaresArray = [...squares]
     if(numberOfClicks % 2 === 0){
       newSquaresArray[targetIndex] = empireIcon
       setSquares(newSquaresArray)
-      let newPlayerXArray = [...xPlayer, targetIndex]
-      setXplayer(newPlayerXArray)
-      winCheck(newPlayerXArray, "The Empire")
+      setXplayer([...xPlayer, targetIndex])
+      winCheck(xPlayer, "The Empire")
       console.log(xPlayer)} 
     
     else {newSquaresArray[targetIndex] = rebelIcon
       setSquares(newSquaresArray)
-      let newPlayerOArray = [...oPlayer, targetIndex]
-      setOplayer(newPlayerOArray)
-      winCheck(newPlayerOArray, "The Rebel Alliance")
+      setOplayer([...oPlayer, targetIndex])
+      winCheck(setOplayer, "The Rebel Alliance")
       console.log(oPlayer)} 
   }
 
   const refreshPage = () => {window.location.reload()}
 
-  const turnIcon = () => {return (!hasAWinner && numberOfClicks % 2 === 1) ? rebelIcon : empireIcon}
+  const turnIcon = () => {
+    return (!hasAWinner && numberOfClicks % 2 === 1) ? rebelIcon : empireIcon
+  }
 
-
-  const turnText = () => {return (!hasAWinner && numberOfClicks % 2 === 1) ? "The Rebel Alliance's Turn" : "The Empire's Turn"}
+  const turnText = () => {
+    return (!hasAWinner && numberOfClicks % 2 === 1) ? "The Rebel Alliance's Turn" : "The Empire's Turn"
+  }
 
   return (
     <>
